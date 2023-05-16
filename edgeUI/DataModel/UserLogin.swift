@@ -19,4 +19,20 @@ struct UserLoginResponse: Decodable {
   }
 }
 
+struct QuestionModel: Codable {
+  let id: Int
+  let title: String
+  let description: String
+  let tags: [String]
+  let votes: Int
+  let answers: Int
+  let views: Int
+  let date: String
+  let comments: [QuestionComment]?
+}
 
+struct QuestionComment: Codable {
+  let author: String
+  let date: String
+  let description: String
+}
