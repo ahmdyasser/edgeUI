@@ -7,18 +7,38 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		9641C29B2A121D2600501D62 /* AskQuestionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9641C29A2A121D2600501D62 /* AskQuestionView.swift */; };
+		9641C29D2A123A4600501D62 /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9641C29C2A123A4600501D62 /* MainView.swift */; };
+		9641C29F2A12831100501D62 /* Networking.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9641C29E2A12831100501D62 /* Networking.swift */; };
+		9641C2A12A12854D00501D62 /* HTTPClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9641C2A02A12854D00501D62 /* HTTPClient.swift */; };
+		9641C2A32A128A8700501D62 /* QuestionsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9641C2A22A128A8700501D62 /* QuestionsService.swift */; };
 		96578A2A2A1172200017CCE9 /* edgeUIApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96578A292A1172200017CCE9 /* edgeUIApp.swift */; };
-		96578A2C2A1172200017CCE9 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96578A2B2A1172200017CCE9 /* ContentView.swift */; };
+		96578A2C2A1172200017CCE9 /* QuestionsListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96578A2B2A1172200017CCE9 /* QuestionsListView.swift */; };
 		96578A2E2A1172210017CCE9 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 96578A2D2A1172210017CCE9 /* Assets.xcassets */; };
 		96578A312A1172210017CCE9 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 96578A302A1172210017CCE9 /* Preview Assets.xcassets */; };
+		96CF2FFC2A11823E00136FCA /* KeychainHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96CF2FFB2A11823E00136FCA /* KeychainHelper.swift */; };
+		96CF2FFF2A11860B00136FCA /* UserLogin.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96CF2FFE2A11860B00136FCA /* UserLogin.swift */; };
+		96CF30032A11866000136FCA /* Services.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96CF30022A11866000136FCA /* Services.swift */; };
+		96CF30052A119F8800136FCA /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96CF30042A119F8800136FCA /* LoginView.swift */; };
+		96CF300A2A11ADFF00136FCA /* QuestionDetailsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96CF30092A11ADFF00136FCA /* QuestionDetailsView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		9641C29A2A121D2600501D62 /* AskQuestionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AskQuestionView.swift; sourceTree = "<group>"; };
+		9641C29C2A123A4600501D62 /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
+		9641C29E2A12831100501D62 /* Networking.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Networking.swift; sourceTree = "<group>"; };
+		9641C2A02A12854D00501D62 /* HTTPClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTPClient.swift; sourceTree = "<group>"; };
+		9641C2A22A128A8700501D62 /* QuestionsService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuestionsService.swift; sourceTree = "<group>"; };
 		96578A262A1172200017CCE9 /* edgeUI.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = edgeUI.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		96578A292A1172200017CCE9 /* edgeUIApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = edgeUIApp.swift; sourceTree = "<group>"; };
-		96578A2B2A1172200017CCE9 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		96578A2B2A1172200017CCE9 /* QuestionsListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuestionsListView.swift; sourceTree = "<group>"; };
 		96578A2D2A1172210017CCE9 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		96578A302A1172210017CCE9 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		96CF2FFB2A11823E00136FCA /* KeychainHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeychainHelper.swift; sourceTree = "<group>"; };
+		96CF2FFE2A11860B00136FCA /* UserLogin.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserLogin.swift; sourceTree = "<group>"; };
+		96CF30022A11866000136FCA /* Services.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Services.swift; sourceTree = "<group>"; };
+		96CF30042A119F8800136FCA /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
+		96CF30092A11ADFF00136FCA /* QuestionDetailsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuestionDetailsView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -52,7 +72,10 @@
 			isa = PBXGroup;
 			children = (
 				96578A292A1172200017CCE9 /* edgeUIApp.swift */,
-				96578A2B2A1172200017CCE9 /* ContentView.swift */,
+				96CF30012A11865600136FCA /* Services */,
+				96CF2FFD2A1185EA00136FCA /* Helpers */,
+				96CF300B2A11AE1900136FCA /* Screens */,
+				96CF30002A11860F00136FCA /* DataModel */,
 				96578A2D2A1172210017CCE9 /* Assets.xcassets */,
 				96578A2F2A1172210017CCE9 /* Preview Content */,
 			);
@@ -65,6 +88,45 @@
 				96578A302A1172210017CCE9 /* Preview Assets.xcassets */,
 			);
 			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		96CF2FFD2A1185EA00136FCA /* Helpers */ = {
+			isa = PBXGroup;
+			children = (
+				96CF2FFB2A11823E00136FCA /* KeychainHelper.swift */,
+			);
+			path = Helpers;
+			sourceTree = "<group>";
+		};
+		96CF30002A11860F00136FCA /* DataModel */ = {
+			isa = PBXGroup;
+			children = (
+				96CF2FFE2A11860B00136FCA /* UserLogin.swift */,
+			);
+			path = DataModel;
+			sourceTree = "<group>";
+		};
+		96CF30012A11865600136FCA /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				96CF30022A11866000136FCA /* Services.swift */,
+				9641C29E2A12831100501D62 /* Networking.swift */,
+				9641C2A02A12854D00501D62 /* HTTPClient.swift */,
+				9641C2A22A128A8700501D62 /* QuestionsService.swift */,
+			);
+			path = Services;
+			sourceTree = "<group>";
+		};
+		96CF300B2A11AE1900136FCA /* Screens */ = {
+			isa = PBXGroup;
+			children = (
+				96578A2B2A1172200017CCE9 /* QuestionsListView.swift */,
+				9641C29C2A123A4600501D62 /* MainView.swift */,
+				9641C29A2A121D2600501D62 /* AskQuestionView.swift */,
+				96CF30092A11ADFF00136FCA /* QuestionDetailsView.swift */,
+				96CF30042A119F8800136FCA /* LoginView.swift */,
+			);
+			path = Screens;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -83,6 +145,8 @@
 			dependencies = (
 			);
 			name = edgeUI;
+			packageProductDependencies = (
+			);
 			productName = edgeUI;
 			productReference = 96578A262A1172200017CCE9 /* edgeUI.app */;
 			productType = "com.apple.product-type.application";
@@ -111,6 +175,8 @@
 				Base,
 			);
 			mainGroup = 96578A1D2A1172200017CCE9;
+			packageReferences = (
+			);
 			productRefGroup = 96578A272A1172200017CCE9 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -137,8 +203,18 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				96578A2C2A1172200017CCE9 /* ContentView.swift in Sources */,
+				96CF300A2A11ADFF00136FCA /* QuestionDetailsView.swift in Sources */,
+				9641C29F2A12831100501D62 /* Networking.swift in Sources */,
+				9641C29D2A123A4600501D62 /* MainView.swift in Sources */,
+				96CF30052A119F8800136FCA /* LoginView.swift in Sources */,
+				9641C29B2A121D2600501D62 /* AskQuestionView.swift in Sources */,
+				96CF30032A11866000136FCA /* Services.swift in Sources */,
+				9641C2A12A12854D00501D62 /* HTTPClient.swift in Sources */,
+				96578A2C2A1172200017CCE9 /* QuestionsListView.swift in Sources */,
+				96CF2FFC2A11823E00136FCA /* KeychainHelper.swift in Sources */,
+				96CF2FFF2A11860B00136FCA /* UserLogin.swift in Sources */,
 				96578A2A2A1172200017CCE9 /* edgeUIApp.swift in Sources */,
+				9641C2A32A128A8700501D62 /* QuestionsService.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
