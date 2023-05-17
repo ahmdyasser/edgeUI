@@ -8,9 +8,11 @@
 import SwiftUI
 
 struct LoginView: View {
-  @State private var username =  "user@example.com"
-  @State private var password = "string"
+  @State private var username =  "kminchelle"
+  @State private var password = "0lelplR"
   @State private var isAuthenticated = false
+  @State private var showAlert = false
+
 
   var body: some View {
     NavigationView {
@@ -23,8 +25,16 @@ struct LoginView: View {
             .font(.largeTitle.bold())
           Spacer()
           VStack(spacing: 40) {
-            TextField("Enter your username", text: $username)
-            SecureField("Enter your password", text: $password)
+            VStack(alignment: .leading, spacing: 5) {
+              Text("Username")
+                .font(.title2.bold())
+              TextField("Enter your username", text: $username)
+            }
+            VStack(alignment: .leading, spacing: 5) {
+              Text("Password")
+                .font(.title2.bold())
+              SecureField("Enter your password", text: $password)
+            }
           }
           .textFieldStyle(.roundedBorder)
           Spacer()
@@ -34,8 +44,14 @@ struct LoginView: View {
               EmptyView()
             }
           Button {
-            login(username: username, password: password)
-            isAuthenticated = true
+
+            Task {
+              isAuthenticated = await authenticate(username: username, password: password)
+              if !isAuthenticated {
+                showAlert =  true
+              }
+
+            }
           } label: {
             LoginButton()
           }
@@ -44,6 +60,11 @@ struct LoginView: View {
         }
         .padding()
       }
+      ProgressView {
+        Text("loading...")
+      }
+    }
+    .alert(Text("Password or username is not valid"), isPresented: $showAlert) {
     }
 
   }
