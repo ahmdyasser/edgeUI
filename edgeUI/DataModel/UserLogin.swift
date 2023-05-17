@@ -21,6 +21,7 @@ struct UserLoginResponse: Decodable {
 
 struct QuestionModel: Codable {
   let id: Int
+  let author: String
   let title: String
   let description: String
   let tags: [String]

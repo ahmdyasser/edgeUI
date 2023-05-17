@@ -9,14 +9,30 @@ import SwiftUI
 
 struct QuestionsListView: View {
   @State private var showSheet = false
-  private let questionTags = ["python", "Swift", "Docker"]
-  
+  @State private var searchText = ""
+  @State private var questionTags = ["python", "Swift", "Docker"]
+  @State private var questionsArray = [
+    QuestionModel(id: 0, author: "ahmdyasser", title: "SwiftUI does require that we pass some sort of view to NavigationLink even when doing programmatic navigation. You’ll probably want to use EmptyView to show nothing at all,", description: "", tags: ["python", "Swift", "Docker"], votes: 2, answers: 1, views: 38, date: "1 month ago", comments: nil),
+    QuestionModel(id: 1, author: "ahmdyasser", title: "SwiftUI does require that we pass some sort of view to NavigationLink even when doing programmatic navigation. You’ll probably want to use EmptyView to show nothing at all,", description: "", tags: ["python", "Swift", "Docker"], votes: 2, answers: 1, views: 38, date: "1 month ago", comments: nil),
+    QuestionModel(id: 2, author: "ahmdyasser", title: "SwiftUI does require that we pass some sort of view to NavigationLink even when doing programmatic navigation. You’ll probably want to use EmptyView to show nothing at all,", description: "", tags: ["python", "Swift", "Docker"], votes: 2, answers: 1, views: 38, date: "1 month ago", comments: nil),
+    QuestionModel(id: 3, author: "ahmdyasser", title: "SwiftUI does require that we pass some sort of view to NavigationLink even when doing programmatic navigation. You’ll probably want to use EmptyView to show nothing at all,", description: "", tags: ["python", "Swift", "Docker"], votes: 2, answers: 1, views: 38, date: "1 month ago", comments: nil),
+    QuestionModel(id: 4, author: "ahmdyasser", title: "SwiftUI does require that we pass some sort of view to NavigationLink even when doing programmatic navigation. You’ll probably want to use EmptyView to show nothing at all,", description: "", tags: ["python", "Swift", "Docker"], votes: 2, answers: 1, views: 38, date: "1 month ago", comments: nil)
+
+  ]
+
+  var searchResults: [String] {
+    if searchText.isEmpty {
+      return questionTags
+    } else {
+      return questionTags.filter { $0.contains(searchText) }
+    }
+  }
   var body: some View {
     NavigationView {
       ZStack {
         Color("gray1")
           .ignoresSafeArea()
-        VStack {
+        VStack(spacing: 4) {
           HStack {
             Button("Ask Question") {
               showSheet.toggle()
@@ -29,42 +45,48 @@ struct QuestionsListView: View {
           }.padding()
           Divider()
           List {
-            ForEach((1...10).reversed(), id: \.self) { _ in
+            ForEach($questionsArray, id: \.id) { $question in
               NavigationLink {
                 QuestionDetailsView()
                   .navigationBarTitleDisplayMode(.inline)
               } label: {
                 VStack(alignment: .leading) {
                   HStack {
-                    Text("2 votes")
-                    Text("1 answer")
-                    Text("38 views")
+                    Text("\(question.votes) votes")
+                    Text("\(question.answers) answer")
+                    Text("\(question.views) views")
                   }
-                  Text("SwiftUI does require that we pass some sort of view to NavigationLink even when doing programmatic navigation. You’ll probably want to use EmptyView to show nothing at all, ")
+                  Text(question.title)
                     .lineLimit(3)
                     .foregroundColor(.blue)
                   HStack {
-                    ForEach(questionTags, id: \.self) {
-
-                      Text($0)
+                    ForEach(searchResults, id: \.self) { result in
+                      Text(result)
+                        .searchCompletion(result)
                         .foregroundColor(.white)
                         .font(.caption)
                         .padding(6)
-                        .background {
-                          Color("gray0")
-                            .cornerRadius(8)
-                        }
+                        .background(Color("gray0"), in: RoundedRectangle(cornerRadius: 8))
                     }
                   }
+                  HStack {
+                    Spacer()
+                    Image(systemName: "person.circle.fill")
+                    Text(question.author)
+                      .foregroundColor(.blue)
+                      .font(.caption.bold())
+                    Text("asked \(question.date)")
+                      .font(.caption)
+                      .foregroundColor(Color.secondary)
+                  }
                 }
+                .padding(.top)
               }
               .listRowBackground(Color.clear)
             }
-
           }
-          
+          .searchable(text: $searchText)
           .listStyle(.plain)
-          
         }
         .navigationTitle("All questions")
       }
