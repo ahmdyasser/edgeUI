@@ -58,7 +58,6 @@ struct QuestionDetailsView: View {
               print("Posting ", answerText, "...")
             }.buttonStyle(.borderedProminent)
           }
-
         }
         .padding()
       }

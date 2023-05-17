@@ -12,8 +12,8 @@ struct LoginView: View {
   @State private var password = "0lelplR"
   @State private var isAuthenticated = false
   @State private var showAlert = false
-
-
+  @State private var isLoading = false
+  
   var body: some View {
     NavigationView {
       ZStack {
@@ -44,13 +44,14 @@ struct LoginView: View {
               EmptyView()
             }
           Button {
-
+            
             Task {
+              isLoading = true
               isAuthenticated = await authenticate(username: username, password: password)
               if !isAuthenticated {
                 showAlert =  true
               }
-
+              
             }
           } label: {
             LoginButton()
@@ -59,14 +60,17 @@ struct LoginView: View {
           Spacer()
         }
         .padding()
-      }
-      ProgressView {
-        Text("loading...")
+        if isLoading {
+          ProgressView(label: {
+            Text("Loading...")
+          })
+          .padding()
+          .background(.ultraThinMaterial, in: RoundedRectangle(cornerRadius: 12))
+        }
       }
     }
     .alert(Text("Password or username is not valid"), isPresented: $showAlert) {
     }
-
   }
 }
 
