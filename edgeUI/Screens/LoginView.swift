@@ -10,7 +10,7 @@ import SwiftUI
 struct LoginView: View {
   @State private var username =  "kminchelle"
   @State private var password = "0lelplR"
-  @State private var isAuthenticated = false
+  @State private var isAuthenticated = UserDefaults.standard.bool(forKey: "isLoggedIn")
   @State private var showAlert = false
   @State private var isLoading = false
   
@@ -48,10 +48,11 @@ struct LoginView: View {
             Task {
               isLoading = true
               isAuthenticated = await authenticate(username: username, password: password)
+              UserDefaults.standard.set(isAuthenticated, forKey: "isLoggedIn")
               if !isAuthenticated {
                 showAlert =  true
+                isLoading = false
               }
-              
             }
           } label: {
             LoginButton()
