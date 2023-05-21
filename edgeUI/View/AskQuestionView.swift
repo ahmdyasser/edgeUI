@@ -11,9 +11,10 @@ struct AskQuestionView: View {
   @State private var questionTitle = ""
   @State private var questionBody = ""
   @State private var tagsText = ""
-  @State private var tagsArray: [String: Int] = [:]
+  @State private var tagsDictionary: [String: Int] = [:]
   @State private var showAlert = false
   @Environment(\.dismiss) var dismiss
+  @ObservedObject var viewModel = AskQuestionViewModel()
 
   var body: some View {
     ZStack {
@@ -26,8 +27,10 @@ struct AskQuestionView: View {
           Spacer()
           Button("Post") {
             print("posting question ...")
-            postQuestion()
-            dismiss()
+            Task {
+              await viewModel.askQuestion(model: AskQuestionPostModel(content: questionBody, title: questionTitle, tags: Array(tagsDictionary.keys)))
+              dismiss()
+            }
           }
           .buttonStyle(.borderedProminent)
         }
@@ -53,8 +56,8 @@ struct AskQuestionView: View {
               .textFieldStyle(.roundedBorder)
               .textCase(.lowercase)
             Button("Add") {
-              if tagsArray.count <= 4 {
-                tagsArray[tagsText] = tagsArray.count+1
+              if tagsDictionary.count <= 4 {
+                tagsDictionary[tagsText] = tagsDictionary.count+1
                 tagsText = ""
               } else {
                 showAlert = true
@@ -69,13 +72,13 @@ struct AskQuestionView: View {
           }
         }
         HStack {
-          ForEach(tagsArray.sorted(by: { $0.key < $1.key }), id: \.key) { (key, value) in
+          ForEach(tagsDictionary.sorted(by: { $0.key < $1.key }), id: \.key) { (key, value) in
             HStack {
               Text(key)
               Image(systemName: "xmark")
                 .tag(key)
                 .onTapGesture {
-                  tagsArray.removeValue(forKey: key)
+                  tagsDictionary.removeValue(forKey: key)
                 }
             }
             .foregroundColor(.white)
