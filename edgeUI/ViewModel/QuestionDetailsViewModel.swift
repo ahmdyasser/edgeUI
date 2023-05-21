@@ -18,10 +18,10 @@ enum TargetType: String {
   case answer
 }
 @MainActor class QuestionDetailsViewModel: ObservableObject {
-  @Published var comments: [QuestionResponseComment] = []
+  @Published var answers: [QuestionResponseAnswer] = []
+  @Published var title: String = ""
+  @Published var content: String = ""
   @Published var id = ""
-  
-  let model = QuestionResponseComment(author: "ahmd yasser", date: "2023-1-1", content: "this is the comment on the quesiotn", isAccepted: true)
 
   func vote(target: TargetType, id: String, voteType: VoteType) -> Int {
     var votes = 0
@@ -62,22 +62,30 @@ enum TargetType: String {
     return 2
   }
 
-  func getComments() {
-    comments.append(model)
-  }
+  func getQuestionDetails(questionID: String) {
 
-  func getQuestionDetails() {
-
-  }
-
-  func postComment(model: QuestionPostComment) async {
-    let headers: HTTPHeaders = [
-      .accept("application/json")
-    ]
-    AF.request("https://reqres.in/api/users", method: .post, parameters: model, encoder: .json, headers: headers)
+    AF.request("http://127.0.0.1:8000/qna/question/\(questionID)")
       .validate()
-      .responseDecodable(of: QuestionResponseComment.self) { result in
-        print(result.value)
+      .responseDecodable(of: QuestionDetailsResponse.self) { result in
+        self.title = result.value?.title ?? "[TITLE]"
+        self.content = result.value?.content ?? "[CONTENT]"
+        print(result)
+
+      }
+
+  }
+
+  func postAnswer(model: QuestionPostAnswer, questionId: String) {
+    let token = KeychainHelper.shared.read(service: "access-token", account: "edgeUI")
+    let tokenString = String(bytes: token ?? Data(), encoding: .utf8) ?? ""
+    let headers: HTTPHeaders = [
+      .accept("application/json"),
+      .authorization(bearerToken: tokenString)
+    ]
+    AF.request("http://127.0.0.1:8000/qna/question/\(questionId)/answer/add/", method: .post, parameters: model, encoder: .json, headers: headers)
+      .validate()
+      .responseDecodable(of: QuestionResponseAnswer.self) { result in
+        print(result)
       }
   }
 

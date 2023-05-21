@@ -28,12 +28,18 @@ struct QuestionResponseModel: Decodable {
   let downvotes: Int
   let tags: [String]?
 //  let answers: Int
-//  let views: Int
+  let views: Int
 }
 
 struct QuestionDetailsResponse: Decodable {
-
-  let comments: [QuestionResponseComment]
+  let id: String
+  let content: String
+  let upvotes: Int
+  let downvotes: Int
+  let author: QuestionAuthor
+  let title: String
+  let tags: [String]?
+  let answers: [QuestionResponseAnswer]?
 }
 
 struct QuestionAuthor: Decodable {
@@ -41,23 +47,21 @@ struct QuestionAuthor: Decodable {
   let username: String
 }
 
-struct QuestionResponseComment: Decodable {
-  let myId = UUID()
-  let author: String
-  let date: String
+struct QuestionResponseAnswer: Decodable {
+  let id: String
   let content: String
+  let upvotes: Int
+  let downvotes: Int
+  let author: QuestionAuthor
   let isAccepted: Bool
   enum CodingKeys: String, CodingKey {
-    case myId
-    case author
-    case date
-    case content
+    case id, content, upvotes, downvotes, author
     case isAccepted = "is_accepted"
   }
 }
 
-struct QuestionPostComment: Encodable {
-  let description: String
+struct QuestionPostAnswer: Encodable {
+  let content: String
 }
 
 

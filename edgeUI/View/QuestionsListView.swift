@@ -32,14 +32,15 @@ struct QuestionsListView: View {
           List {
             ForEach(viewModel.questionsList, id: \.id) { question in
               NavigationLink {
-                QuestionDetailsView()
+
+                QuestionDetailsView(questionId: question.id)
                   .navigationBarTitleDisplayMode(.inline)
               } label: {
                 VStack(alignment: .leading) {
                   HStack {
                     Text("\(question.upvotes+question.downvotes) votes")
                     Text("\(0) answer")
-                    Text("\(0) views")
+                    Text("\(question.views) views")
                   }
                   Text(question.title)
                     .lineLimit(3)

@@ -11,6 +11,7 @@ struct QuestionDetailsView: View {
   @State private var answerText = ""
   @State private var votes = 0
   @ObservedObject var viewModel = QuestionDetailsViewModel()
+  var questionId: String
   @State var isApproved = true
   var body: some View {
     ZStack {
@@ -18,7 +19,7 @@ struct QuestionDetailsView: View {
         .ignoresSafeArea()
       ScrollView {
         VStack(alignment: .leading) {
-          Text("fail to adding an element into std::map by insert fucntion")
+          Text(viewModel.title)
             .font(.title)
           Divider()
           HStack(spacing: 12) {
@@ -47,7 +48,7 @@ struct QuestionDetailsView: View {
               Spacer()
             }
 
-            Text("error: no matching function for call to 'std::map<unsigned int, khaos_event>::insert(std::pair<unsigned int, khaos_event>)'\nHow can I fix this? where do I make a misunderstanding? any comments and suggestions are appreciated. thanks in advance.")
+            Text(viewModel.content)
 
           }
           .padding(.top, 20)
@@ -59,7 +60,8 @@ struct QuestionDetailsView: View {
             TextField("Enter your answer here", text: $answerText, axis: .vertical)
               .textFieldStyle(.roundedBorder)
             Button("Post your answer") {
-              print("Posting ", answerText, "...")
+              viewModel.postAnswer(model: QuestionPostAnswer(content: answerText), questionId: questionId)
+              answerText = ""
             }.buttonStyle(.borderedProminent)
           }
         }
@@ -70,14 +72,14 @@ struct QuestionDetailsView: View {
           Text("Answers")
             .font(.title2.bold())
             .padding(.bottom, 15)
-          ForEach(viewModel.comments, id: \.myId) { comment in
+          ForEach(viewModel.answers, id: \.id) { answer in
             VStack(alignment: .leading, spacing: 20) {
               HStack {
-                if comment.isAccepted {
+                if answer.isAccepted {
                   Image(systemName: "checkmark.seal.fill")
                     .foregroundColor(.green)
                 }
-                Text(comment.content)
+                Text(answer.content)
                 Spacer()
                 Menu {
                   Button("Delete") {
@@ -95,7 +97,7 @@ struct QuestionDetailsView: View {
               HStack {
                 Spacer()
                 Image(systemName: "person.circle.fill")
-                Text(comment.author)
+                Text(answer.author.username)
                   .foregroundColor(.blue)
                   .font(.caption.bold())
                 Text("asked at \(viewModel.getFormattedDate())")
@@ -108,15 +110,11 @@ struct QuestionDetailsView: View {
         .padding()
       }
     }
-    .onAppear {
-      viewModel.getComments()
+    .refreshable {
+      viewModel.getQuestionDetails(questionID: questionId)
     }
-  }
-}
-
-
-struct QuestionDetails_Previews: PreviewProvider {
-  static var previews: some View {
-    QuestionDetailsView()
+    .onAppear {
+      viewModel.getQuestionDetails(questionID: questionId)
+    }
   }
 }
