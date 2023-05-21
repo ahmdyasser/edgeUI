@@ -25,28 +25,25 @@ enum TargetType: String {
 
   func vote(target: TargetType, id: String, voteType: VoteType) -> Int {
     var votes = 0
+    var endpoint = ""
     let token = KeychainHelper.shared.read(service: "access-token", account: "edgeUI")
     let tokenString = String(bytes: token ?? Data(), encoding: .utf8) ?? ""
     let headers: HTTPHeaders = [
       .authorization(bearerToken: tokenString)
     ]
-    var endpoint = ""
     switch target {
     case .question:
       endpoint = "http://127.0.0.1:8000/qna/question/\(id)/\(voteType.rawValue)"
     case .answer:
       endpoint = "http://127.0.0.1:8000/qna/answer/\(id)/\(voteType.rawValue)"
     }
-
     AF.request(endpoint, headers: headers)
       .validate()
       .responseDecodable(of: VoteResponseModel.self) { result in
         result.value
         votes = (result.value?.downvotes ?? 0) + (result.value?.upvotes ?? 0)
       }
-
     return votes
-
   }
 
 
@@ -58,21 +55,28 @@ enum TargetType: String {
     return shortDateString
   }
 
-  func downvoteQuestion() -> Int {
-    return 2
-  }
-
   func getQuestionDetails(questionID: String) {
-
     AF.request("http://127.0.0.1:8000/qna/question/\(questionID)")
       .validate()
       .responseDecodable(of: QuestionDetailsResponse.self) { result in
         self.title = result.value?.title ?? "[TITLE]"
         self.content = result.value?.content ?? "[CONTENT]"
-        print(result)
-
+        self.answers = result.value?.answers ?? []
       }
+  }
 
+  func acceptAnswer(answerId: String) {
+    let token = KeychainHelper.shared.read(service: "access-token", account: "edgeUI")
+    let tokenString = String(bytes: token ?? Data(), encoding: .utf8) ?? ""
+    let headers: HTTPHeaders = [
+      .authorization(bearerToken: tokenString)
+    ]
+
+    AF.request("http://127.0.0.1:8000/qna/answer/\(answerId)/accept/", method: .post, headers: headers)
+      .validate()
+      .responseDecodable(of: AskQuestionResponseModel.self) { response in
+        print(response.result)
+      }
   }
 
   func postAnswer(model: QuestionPostAnswer, questionId: String) {

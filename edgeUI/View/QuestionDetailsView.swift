@@ -86,7 +86,7 @@ struct QuestionDetailsView: View {
 //                    viewModel.deleteAns
                   }
                   Button("Approve answer") {
-//                    viewModel.approveAnswer
+                    viewModel.acceptAnswer(answerId: answer.id)
                   }
 
                 } label: {

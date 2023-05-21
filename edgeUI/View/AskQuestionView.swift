@@ -12,6 +12,9 @@ struct AskQuestionView: View {
   @State private var questionBody = ""
   @State private var tagsText = ""
   @State private var tagsDictionary: [String: Int] = [:]
+  private var postIsDisabled: Bool {
+    questionTitle.isEmpty || questionBody.isEmpty
+  }
   @State private var showAlert = false
   @Environment(\.dismiss) var dismiss
   @ObservedObject var viewModel = AskQuestionViewModel()
@@ -32,6 +35,7 @@ struct AskQuestionView: View {
               dismiss()
             }
           }
+          .disabled(postIsDisabled)
           .buttonStyle(.borderedProminent)
         }
         VStack(alignment: .leading, spacing: 4) {
