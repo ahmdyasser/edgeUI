@@ -25,31 +25,7 @@ enum TargetType: String {
   @Published var id = ""
   @Published var username: String = ""
   @Published var votes: Int = 0
-  func vote(target: TargetType, id: String, voteType: VoteType) -> Int {
-    var votes = 0
-    var endpoint = ""
-    let token = KeychainHelper.shared.read(service: "access-token", account: "edgeUI")
-    let tokenString = String(bytes: token ?? Data(), encoding: .utf8) ?? ""
-    let headers: HTTPHeaders = [
-      .authorization(bearerToken: tokenString)
-    ]
-    switch target {
-    case .question:
-      endpoint = "http://127.0.0.1:8000/qna/question/\(id)/\(voteType.rawValue)"
-    case .answer:
-      endpoint = "http://127.0.0.1:8000/qna/answer/\(id)/\(voteType.rawValue)"
-    }
-
-    AF.request(endpoint, method: .post, headers: headers)
-      .validate()
-      .responseDecodable(of: VoteResponseModel.self) { result in
-        result.value
-        print(result)
-        votes = (result.value?.downvotes ?? 0) + (result.value?.upvotes ?? 0)
-      }
-    return votes
-  }
-
+  var endpoint = ""
 
   func getFormattedDate() -> String {
     let dateFormatter = DateFormatter()
@@ -115,5 +91,30 @@ enum TargetType: String {
         print(result)
       }
   }
+
+  func vote(target: TargetType, id: String, voteType: VoteType) -> Int {
+    var votes = 0
+
+    let token = KeychainHelper.shared.read(service: "access-token", account: "edgeUI")
+    let tokenString = String(bytes: token ?? Data(), encoding: .utf8) ?? ""
+    let headers: HTTPHeaders = [
+      .authorization(bearerToken: tokenString)
+    ]
+    switch target {
+    case .question:
+      endpoint = "http://127.0.0.1:8000/qna/question/\(id)/\(voteType.rawValue)/"
+    case .answer:
+      endpoint = "http://127.0.0.1:8000/qna/answer/\(id)/\(voteType.rawValue)/"
+    }
+
+    AF.request(endpoint, method: .post, headers: headers)
+      .validate()
+      .responseDecodable(of: VoteResponseModel.self) { result in
+        print(result)
+        votes = (result.value?.downvotes ?? 0) + (result.value?.upvotes ?? 0)
+      }
+    return votes
+  }
+
 
 }

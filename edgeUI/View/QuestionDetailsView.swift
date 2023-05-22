@@ -53,6 +53,7 @@ struct QuestionDetailsView: View {
             }
             
             Text(viewModel.content)
+              .font(.title3)
             
           }
           .padding(.top, 20)
@@ -103,7 +104,7 @@ struct QuestionDetailsView: View {
                 HStack(alignment: .top) {
                   VStack(spacing: 8) {
                     Button {
-                      votes = viewModel.vote(target: .answer, id: viewModel.id, voteType: .upvote)
+                      viewModel.vote(target: .answer, id: answer.id, voteType: .upvote)
                       
                     } label: {
                       Image(systemName: "arrowtriangle.up.square.fill")
@@ -112,10 +113,10 @@ struct QuestionDetailsView: View {
                         .frame(width: 25)
                         .symbolRenderingMode(.hierarchical)
                     }
-                    Text("\(votes)")
+                    Text("\(answer.upvotes - answer.downvotes)")
                       .font(.body.bold())
                     Button {
-                      votes = viewModel.vote(target: .answer, id: viewModel.id, voteType: .downvote)
+                    viewModel.vote(target: .answer, id: answer.id, voteType: .downvote)
                       
                     } label: {
                       Image(systemName: "arrowtriangle.down.square.fill")
