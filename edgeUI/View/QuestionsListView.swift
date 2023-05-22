@@ -42,9 +42,11 @@ struct QuestionsListView: View {
                     Text("\(0) answer")
                     Text("\(question.views) views")
                   }
+                  .foregroundStyle(.secondary)
                   Text(question.title)
+                    .font(.title3)
                     .lineLimit(3)
-                    .foregroundColor(.blue)
+
                   HStack {
                     ForEach(question.tags ?? [], id: \.self) { tag in
                       Text(tag)

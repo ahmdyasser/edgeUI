@@ -19,10 +19,12 @@ enum TargetType: String {
 }
 @MainActor class QuestionDetailsViewModel: ObservableObject {
   @Published var answers: [QuestionResponseAnswer] = []
+  @Published var tags: [String] = []
   @Published var title: String = ""
   @Published var content: String = ""
   @Published var id = ""
-
+  @Published var username: String = ""
+  @Published var votes: Int = 0
   func vote(target: TargetType, id: String, voteType: VoteType) -> Int {
     var votes = 0
     var endpoint = ""
@@ -37,10 +39,12 @@ enum TargetType: String {
     case .answer:
       endpoint = "http://127.0.0.1:8000/qna/answer/\(id)/\(voteType.rawValue)"
     }
-    AF.request(endpoint, headers: headers)
+
+    AF.request(endpoint, method: .post, headers: headers)
       .validate()
       .responseDecodable(of: VoteResponseModel.self) { result in
         result.value
+        print(result)
         votes = (result.value?.downvotes ?? 0) + (result.value?.upvotes ?? 0)
       }
     return votes
@@ -62,6 +66,10 @@ enum TargetType: String {
         self.title = result.value?.title ?? "[TITLE]"
         self.content = result.value?.content ?? "[CONTENT]"
         self.answers = result.value?.answers ?? []
+        self.tags = result.value?.tags ?? []
+        self.username = result.value?.author.username ?? "[USERNAME]"
+        self.id = result.value?.id ?? "[ID]"
+        self.votes = (result.value?.upvotes ?? 0) - (result.value?.downvotes ?? 0)
       }
   }
 
@@ -77,6 +85,21 @@ enum TargetType: String {
       .responseDecodable(of: AskQuestionResponseModel.self) { response in
         print(response.result)
       }
+  }
+
+  func deleteAnswer(answerId: String) {
+    let token = KeychainHelper.shared.read(service: "access-token", account: "edgeUI")
+    let tokenString = String(bytes: token ?? Data(), encoding: .utf8) ?? ""
+    let headers: HTTPHeaders = [
+      .authorization(bearerToken: tokenString)
+    ]
+
+    AF.request("http://127.0.0.1:8000/qna/answer/\(answerId)/delete/", method: .post, headers: headers)
+      .validate()
+      .responseDecodable(of: AskQuestionResponseModel.self) { response in
+        print(response.result)
+      }
+
   }
 
   func postAnswer(model: QuestionPostAnswer, questionId: String) {

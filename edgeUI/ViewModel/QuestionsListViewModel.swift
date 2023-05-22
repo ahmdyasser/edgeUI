@@ -27,7 +27,7 @@ import Alamofire
       }
       .responseDecodable(of: [QuestionResponseModel].self) { result in
         print(result)
-        self.questionsList = result.value?.reversed() ?? []
+        self.questionsList = result.value ?? []
       }
   }
   

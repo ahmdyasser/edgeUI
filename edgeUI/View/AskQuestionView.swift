@@ -68,8 +68,9 @@ struct AskQuestionView: View {
               }
             }
             .disabled(tagsText.isEmpty)
-            .buttonStyle(.bordered)
-            .foregroundColor(.white)
+            .buttonStyle(.borderedProminent)
+            .foregroundColor(.black)
+            .tint(.white)
             .alert("5 is the max number of tags", isPresented: $showAlert) {
               Button("Ok", role: .cancel) { }
             }
