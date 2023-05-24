@@ -12,7 +12,6 @@ struct QuestionsListView: View {
   @State private var showSheet = false
   @State private var searchText = ""
   var body: some View {
-    NavigationView {
       ZStack {
         Color("gray1")
           .ignoresSafeArea()
@@ -80,10 +79,6 @@ struct QuestionsListView: View {
       .refreshable {
         await viewModel.fetchQuestions()
     }
-    }
-
-    .navigationBarTitleDisplayMode(.large)
-    .navigationBarBackButtonHidden(true)
     .task {
       await viewModel.fetchQuestions()
     }

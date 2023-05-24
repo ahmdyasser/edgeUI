@@ -10,7 +10,7 @@ import SwiftUI
 struct LoginView: View {
   @State private var username =  "user@example.com"
   @State private var password = "string"
-  @State private var isAuthenticated = UserDefaults.standard.bool(forKey: "isLoggedIn")
+  @State private var isAuthenticated = false
   @State private var showAlert = false
   @State private var isLoading = false
   @ObservedObject var viewModel = LoginViewModel()
@@ -40,7 +40,10 @@ struct LoginView: View {
           .textFieldStyle(.roundedBorder)
           Spacer()
           NavigationLink(
-            destination: QuestionsListView(viewModel: QuestionsListViewModel()),
+            destination: MainView()
+              .navigationBarTitleDisplayMode(.large)
+              .navigationBarBackButtonHidden(true)
+            ,
             isActive: $isAuthenticated) {
               EmptyView()
             }
@@ -70,6 +73,7 @@ struct LoginView: View {
         }
       }
     }
+    .navigationBarBackButtonHidden(true)
     .alert(Text("Password or username is not valid"), isPresented: $showAlert) {
     }
   }
@@ -91,7 +95,7 @@ struct LoginButton: View {
       Text("Login")
         .foregroundColor(.white)
         .font(.title3.bold())
-      .padding()
+        .padding()
     }
   }
 }

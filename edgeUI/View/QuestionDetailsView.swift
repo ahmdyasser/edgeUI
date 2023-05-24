@@ -92,7 +92,7 @@ struct QuestionDetailsView: View {
                 .font(.subheadline.bold())
                 .foregroundStyle(.secondary)
                 .multilineTextAlignment(.center)
-              Image(systemName: "trash.fill")
+              Image(systemName: "message.fill")
                 .resizable()
                 .scaledToFill()
                 .frame(width: 70)
@@ -104,6 +104,8 @@ struct QuestionDetailsView: View {
                 HStack(alignment: .top) {
                   VStack(spacing: 8) {
                     Button {
+
+                      
                       viewModel.vote(target: .answer, id: answer.id, voteType: .upvote)
                       
                     } label: {
@@ -116,7 +118,7 @@ struct QuestionDetailsView: View {
                     Text("\(answer.upvotes - answer.downvotes)")
                       .font(.body.bold())
                     Button {
-                    viewModel.vote(target: .answer, id: answer.id, voteType: .downvote)
+                      viewModel.vote(target: .answer, id: answer.id, voteType: .downvote)
                       
                     } label: {
                       Image(systemName: "arrowtriangle.down.square.fill")
@@ -136,11 +138,23 @@ struct QuestionDetailsView: View {
                     .font(.body.bold())
                   Spacer()
                   Menu {
-                    Button("Delete") {
+                    Button {
                       viewModel.deleteAnswer(answerId: answer.id)
+                    } label: {
+                      HStack {
+                        Text("Delete")
+                        Image(systemName: "trash")
+                      }
                     }
-                    Button("Approve answer") {
+
+                    Button {
                       viewModel.acceptAnswer(answerId: answer.id)
+
+                    } label: {
+                      HStack {
+                        Text("Approve answer")
+                        Image(systemName: "checkmark.seal")
+                      }
                     }
                     
                   } label: {
@@ -181,10 +195,11 @@ struct QuestionDetailsView: View {
         }
         .padding()
       }
+      .refreshable {
+        viewModel.getQuestionDetails(questionID: questionId)
+      }
     }
-    .refreshable {
-      viewModel.getQuestionDetails(questionID: questionId)
-    }
+
     .onAppear {
       viewModel.getQuestionDetails(questionID: questionId)
     }

@@ -11,6 +11,7 @@
 		963A40482A1A22D800ADFC66 /* QuestionDetailsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 963A40472A1A22D800ADFC66 /* QuestionDetailsViewModel.swift */; };
 		9641C29B2A121D2600501D62 /* AskQuestionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9641C29A2A121D2600501D62 /* AskQuestionView.swift */; };
 		9641C29D2A123A4600501D62 /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9641C29C2A123A4600501D62 /* MainView.swift */; };
+		964875752A1C2090008F05F3 /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 964875742A1C2090008F05F3 /* ProfileView.swift */; };
 		96578A2A2A1172200017CCE9 /* edgeUIApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96578A292A1172200017CCE9 /* edgeUIApp.swift */; };
 		96578A2C2A1172200017CCE9 /* QuestionsListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96578A2B2A1172200017CCE9 /* QuestionsListView.swift */; };
 		96578A2E2A1172210017CCE9 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 96578A2D2A1172210017CCE9 /* Assets.xcassets */; };
@@ -29,6 +30,7 @@
 		963A40472A1A22D800ADFC66 /* QuestionDetailsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuestionDetailsViewModel.swift; sourceTree = "<group>"; };
 		9641C29A2A121D2600501D62 /* AskQuestionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AskQuestionView.swift; sourceTree = "<group>"; };
 		9641C29C2A123A4600501D62 /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
+		964875742A1C2090008F05F3 /* ProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
 		96578A262A1172200017CCE9 /* edgeUI.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = edgeUI.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		96578A292A1172200017CCE9 /* edgeUIApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = edgeUIApp.swift; sourceTree = "<group>"; };
 		96578A2B2A1172200017CCE9 /* QuestionsListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuestionsListView.swift; sourceTree = "<group>"; };
@@ -127,6 +129,7 @@
 				9641C29A2A121D2600501D62 /* AskQuestionView.swift */,
 				96CF30092A11ADFF00136FCA /* QuestionDetailsView.swift */,
 				96CF30042A119F8800136FCA /* LoginView.swift */,
+				964875742A1C2090008F05F3 /* ProfileView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -208,6 +211,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				96CF300A2A11ADFF00136FCA /* QuestionDetailsView.swift in Sources */,
+				964875752A1C2090008F05F3 /* ProfileView.swift in Sources */,
 				9641C29D2A123A4600501D62 /* MainView.swift in Sources */,
 				96B0CFFB2A1A1A5D0011FA3A /* AskQuestionViewModel.swift in Sources */,
 				96CF30052A119F8800136FCA /* LoginView.swift in Sources */,

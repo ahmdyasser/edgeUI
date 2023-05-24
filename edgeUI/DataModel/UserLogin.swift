@@ -60,6 +60,10 @@ struct QuestionResponseAnswer: Decodable {
   }
 }
 
+struct AnswerPostResponse: Decodable {
+let id: String
+}
+
 struct QuestionPostAnswer: Encodable {
   let content: String
 }

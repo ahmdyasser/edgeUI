@@ -10,11 +10,16 @@ import SwiftUI
 struct MainView: View {
   var body: some View {
     TabView {
-      Text("Home Tab")
-        .font(.system(size: 30, weight: .bold, design: .rounded))
+      QuestionsListView()
         .tabItem {
           Image(systemName: "house.fill")
           Text("Home")
+        }
+
+      ProfileView()
+        .tabItem {
+          Image(systemName: "person.fill")
+          Text("Profile")
         }
       
     }

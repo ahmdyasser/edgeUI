@@ -78,6 +78,8 @@ enum TargetType: String {
 
   }
 
+
+
   func postAnswer(model: QuestionPostAnswer, questionId: String) {
     let token = KeychainHelper.shared.read(service: "access-token", account: "edgeUI")
     let tokenString = String(bytes: token ?? Data(), encoding: .utf8) ?? ""
@@ -87,7 +89,7 @@ enum TargetType: String {
     ]
     AF.request("http://127.0.0.1:8000/qna/question/\(questionId)/answer/add/", method: .post, parameters: model, encoder: .json, headers: headers)
       .validate()
-      .responseDecodable(of: QuestionResponseAnswer.self) { result in
+      .responseDecodable(of: AskQuestionResponseModel.self) { result in
         print(result)
       }
   }
@@ -115,6 +117,5 @@ enum TargetType: String {
       }
     return votes
   }
-
 
 }
